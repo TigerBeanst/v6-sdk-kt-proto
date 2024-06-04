@@ -21,5 +21,8 @@ kotlin {
     jvmToolchain(17)
 }
 wire {
-    kotlin {}
+    kotlin {
+        rpcRole = "client"
+        rpcCallStyle = "suspending"
+    }
 }
