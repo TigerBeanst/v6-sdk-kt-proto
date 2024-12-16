@@ -1,0 +1,64 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出本仓库
+      uses: actions/checkout@v4
+      
+    - name: 检出 Proto 仓库
+      uses: actions/checkout@master
+      with:
+          repository: city404/v6-public-rpc-proto
+          path: ./v6-proto
+          
+    - name: 复制 Proto 文件
+      run: >
+        cp -r ./v6-proto/common ./src/main/proto
+        cp -r ./v6-proto/offline/. ./src/main/proto
+        cp -r ./v6-proto/rpcs/. ./src/main/proto
+        cp -r ./v6-proto/sftp/. ./src/main/proto
+        cp -r ./v6-proto/share/. ./src/main/proto
+        cp -r ./v6-proto/slice/. ./src/main/proto
+        cp -r ./v6-proto/user/. ./src/main/proto
+        cp -r ./v6-proto/userfile/. ./src/main/proto
+        cp -r ./v6-proto/webdav/. ./src/main/proto
+        cp -r ./v6-proto/wrtc/. ./src/main/proto
+        echo "=!!!========!!!=========!!!=======!!!=========!!!===="
+        ll ./src/main/proto
+        echo "=!!!========!!!=========!!!=======!!!=========!!!===="
+    
+    - name: 初始化 JDK 环境
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: 授予 gradlew 权限
+      run: chmod +x gradlew
+      
+    - name: 生成 Kotlin 文件
+      run: ./gradlew generateProtos
+      
+    - name: 打包生成的 Kotlin 文件
+      run: |
+          zip -r ./v6-sdk-kt-proto-generateProtos.zip ./build/generated/source/wire
+
+    - name: 创建 Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        draft: false
+        prerelease: false
+        files: |
+            ./v6-sdk-kt-proto-generateProtos.zip
