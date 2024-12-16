@@ -34,7 +34,7 @@ jobs:
         cp -r ./v6-proto/webdav/. ./src/main/proto
         cp -r ./v6-proto/wrtc/. ./src/main/proto
         echo "=!!!========!!!=========!!!=======!!!=========!!!===="
-        ll ./src/main/proto
+        ls -l ./src/main/proto
         echo "=!!!========!!!=========!!!=======!!!=========!!!===="
     
     - name: 初始化 JDK 环境
