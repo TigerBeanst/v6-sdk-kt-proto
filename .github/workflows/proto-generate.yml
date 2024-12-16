@@ -53,7 +53,7 @@ jobs:
     - name: 生成 Release 版本号
       id: tag
       run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d_%H:%M")"
+        echo "::set-output name=release_tag::$(date +"%Y.%m.%d_%H-%M")"
         
     - name: 创建 Release
       id: create_release
