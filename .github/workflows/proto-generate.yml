@@ -23,18 +23,18 @@ jobs:
           
     - name: 复制 Proto 文件
       run: >
-        cp -r ./v6-proto/common ./src/main/proto
-        cp -r ./v6-proto/offline/. ./src/main/proto
-        cp -r ./v6-proto/rpcs/. ./src/main/proto
-        cp -r ./v6-proto/sftp/. ./src/main/proto
-        cp -r ./v6-proto/share/. ./src/main/proto
-        cp -r ./v6-proto/slice/. ./src/main/proto
-        cp -r ./v6-proto/user/. ./src/main/proto
-        cp -r ./v6-proto/userfile/. ./src/main/proto
-        cp -r ./v6-proto/webdav/. ./src/main/proto
-        cp -r ./v6-proto/wrtc/. ./src/main/proto
-        echo "=!!!========!!!=========!!!=======!!!=========!!!===="
-        ll ./src/main/proto
+        cp -r ./v6-proto/common ./src/main/proto \
+        cp -r ./v6-proto/offline/. ./src/main/proto \
+        cp -r ./v6-proto/rpcs/. ./src/main/proto \
+        cp -r ./v6-proto/sftp/. ./src/main/proto \
+        cp -r ./v6-proto/share/. ./src/main/proto \
+        cp -r ./v6-proto/slice/. ./src/main/proto \
+        cp -r ./v6-proto/user/. ./src/main/proto \
+        cp -r ./v6-proto/userfile/. ./src/main/proto \
+        cp -r ./v6-proto/webdav/. ./src/main/proto \
+        cp -r ./v6-proto/wrtc/. ./src/main/proto \
+        echo "=!!!========!!!=========!!!=======!!!=========!!!====" \
+        ll ./src/main/proto \
         echo "=!!!========!!!=========!!!=======!!!=========!!!===="
     
     - name: 初始化 JDK 环境
